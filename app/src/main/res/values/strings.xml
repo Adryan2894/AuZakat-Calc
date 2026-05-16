@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">GoldZakatCalc</string>
+    <string-array name="gold_types">
+        <item>Keep</item>
+        <item>Wear</item>
+    </string-array>
+</resources>

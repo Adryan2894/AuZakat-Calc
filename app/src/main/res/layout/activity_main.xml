@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    tools:context=".MainActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#CC2C1B12"
+        app:elevation="4dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/my_toolbar"
+            style="@style/AppToolbarStyle"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@android:color/transparent"
+            app:titleTextColor="#FFFFFF" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#40FFE082" />
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        android:scrollbars="none"
+        app:layout_constraintTop_toBottomOf="@id/appBarLayout"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardInstruction"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="24dp"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="4dp"
+                app:cardBackgroundColor="#4D000000"
+                app:strokeColor="#FFE082"
+                app:strokeWidth="1.5dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="16dp">
+
+                    <ImageView
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:layout_gravity="center_vertical"
+                        android:src="@android:drawable/ic_dialog_info"
+                        app:tint="#FFE082" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginStart="14dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="IMPORTANT GUIDE"
+                            android:textColor="#FFE082"
+                            android:textSize="12sp"
+                            android:textStyle="bold"
+                            android:letterSpacing="0.08" />
+
+                        <TextView
+                            android:id="@+id/tvInstruction"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:text="Zakat is payable if weight exceeds 85g (Keep) or 200g (Wear)."
+                            android:textColor="#FFFFFF"
+                            android:textSize="14sp"
+                            android:textStyle="bold"
+                            android:lineSpacingExtra="3dp" />
+                    </LinearLayout>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="24dp"
+                app:cardCornerRadius="24dp"
+                app:cardElevation="6dp"
+                app:cardBackgroundColor="#66000000"
+                app:strokeColor="#FFE082"
+                app:strokeWidth="1.5dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="20dp">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/weightInputLayout"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColorHint="#FFFFFF"
+                        app:hintTextColor="#FFE082"
+                        app:boxStrokeColor="#FFE082"
+                        app:startIconTint="#FFE082"
+                        app:boxStrokeWidth="1.5dp"
+                        app:boxStrokeWidthFocused="2.5dp"
+                        app:startIconDrawable="@android:drawable/ic_menu_edit">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/goldWeight"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Gold Weight (grams)"
+                            android:textColor="#FFFFFF"
+                            android:textColorHint="#E0E0E0"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            android:inputType="numberDecimal" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <TextView
+                        android:id="@+id/tvLabelType"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        android:layout_marginTop="24dp"
+                        android:text="Select Gold Type"
+                        android:textColor="#FFE082"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        android:letterSpacing="0.05" />
+
+                    <FrameLayout
+                        android:id="@+id/spinnerContainer"
+                        android:layout_width="match_parent"
+                        android:layout_height="56dp"
+                        android:layout_marginTop="8dp"
+                        android:background="@drawable/bg_note_box"
+                        android:backgroundTint="#80000000"
+                        android:paddingHorizontal="12dp">
+
+                        <Spinner
+                            android:id="@+id/goldType"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:entries="@array/gold_types"
+                            android:spinnerMode="dropdown"
+                            android:backgroundTint="#FFE082" />
+                    </FrameLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/priceInputLayout"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="24dp"
+                        android:textColorHint="#FFFFFF"
+                        app:hintTextColor="#FFE082"
+                        app:boxStrokeColor="#FFE082"
+                        app:startIconTint="#FFE082"
+                        app:boxStrokeWidth="1.5dp"
+                        app:boxStrokeWidthFocused="2.5dp"
+                        app:startIconDrawable="@android:drawable/ic_menu_recent_history">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/goldPrice"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Current Price (RM/gram)"
+                            android:textColor="#FFFFFF"
+                            android:textColorHint="#E0E0E0"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            android:inputType="numberDecimal" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnCalculate"
+                android:layout_width="match_parent"
+                android:layout_height="62dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="16dp"
+                android:text="Calculate Zakat"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="#3E2723"
+                android:letterSpacing="0.06"
+                app:backgroundTint="#FFFFFF"
+                app:cornerRadius="18dp"
+                app:elevation="10dp" />
+
+        </LinearLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
