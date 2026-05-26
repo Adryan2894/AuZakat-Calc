@@ -168,7 +168,7 @@
                             android:layout_height="match_parent"
                             android:entries="@array/gold_types"
                             android:spinnerMode="dropdown"
-                            android:backgroundTint="#FFE082" />
+                            android:backgroundTint="#fafff1" />
                     </FrameLayout>
 
                     <com.google.android.material.textfield.TextInputLayout

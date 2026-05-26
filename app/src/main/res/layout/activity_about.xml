@@ -208,7 +208,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="24dp"
-                android:text="https://github.com/Adryan2894/AuZakat-Calculator"
+                android:text="https://github.com/Adryan2894/AuZakat-Calc"
                 android:textColor="#FFE082"
                 android:textSize="15sp"
                 android:textStyle="bold"

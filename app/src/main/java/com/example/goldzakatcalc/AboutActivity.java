@@ -17,22 +17,19 @@ public class AboutActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about);
 
-        // Setup Toolbar
         Toolbar toolbar = findViewById(R.id.my_toolbar);
         setSupportActionBar(toolbar);
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setTitle("Developer Profile"); // Set tajuk toolbar di sini
+            getSupportActionBar().setTitle("Developer Profile");
         }
 
-        // Setup GitHub Link
         tvGithubLink = findViewById(R.id.tvGithubLink);
 
-        // ⚠️ SILA TUKAR: Gantikan dengan link GitHub anda yang sebenar
-        final String githubUrl = "https://github.com/Adryan2894/AuZakat-Calculator";
+        final String githubUrl = "https://github.com/Adryan2894/AuZakat-Calc";
         tvGithubLink.setText(githubUrl);
 
-        // Membuatkan text URL boleh diklik untuk buka browser
+
         tvGithubLink.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -45,7 +42,7 @@ public class AboutActivity extends AppCompatActivity {
 
     @Override
     public boolean onSupportNavigateUp() {
-        finish(); // Menutup halaman ini dan kembali ke halaman utama (Main)
+        finish();
         return true;
     }
 }

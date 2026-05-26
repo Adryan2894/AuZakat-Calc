@@ -9,12 +9,8 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 import com.google.android.material.textfield.TextInputEditText;
 
@@ -30,16 +26,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        myToolbar = findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setTitle("AuZakat");
+        }
 
-        myToolbar.setTitle("My Menu");
-
-
-        getSupportActionBar().setTitle("AuZakat");
-
-
-        // Link Java variables to XML IDs
+        // Link Java variables to XML IDs safely
         etWeight = findViewById(R.id.goldWeight);
         etPrice = findViewById(R.id.goldPrice);
         spType = findViewById(R.id.goldType);
@@ -48,8 +41,8 @@ public class MainActivity extends AppCompatActivity {
         btnCalc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String weightStr = etWeight.getText().toString();
-                String priceStr = etPrice.getText().toString();
+                String weightStr = etWeight.getText().toString().trim();
+                String priceStr = etPrice.getText().toString().trim();
 
                 if (weightStr.isEmpty()) {
                     etWeight.setError("Weight is required");
@@ -62,28 +55,33 @@ public class MainActivity extends AppCompatActivity {
                     return;
                 }
 
-                double weight = Double.parseDouble(weightStr);
-                double price = Double.parseDouble(priceStr);
-                String type = spType.getSelectedItem().toString();
+                try {
+                    double weight = Double.parseDouble(weightStr);
+                    double price = Double.parseDouble(priceStr);
+                    String type = spType.getSelectedItem().toString();
 
+                    // Using .contains to remain robust against formatted strings like "Keep (85g)"
+                    int uruf = type.contains("Keep") ? 85 : 200;
 
-                int uruf = type.equals("Keep") ? 85 : 200;
+                    double totalValue = weight * price;
+                    double weightMinusX = weight - uruf;
 
+                    if (weightMinusX < 0) {
+                        weightMinusX = 0;
+                    }
 
-                double totalValue = weight * price;
-                double weightMinusX = weight - uruf;
+                    double zakatPayableValue = weightMinusX * price;
+                    double totalZakat = zakatPayableValue * 0.025;
 
+                    Intent intent = new Intent(MainActivity.this, ResultActivity.class);
+                    intent.putExtra("TOTAL_VALUE", totalValue);
+                    intent.putExtra("PAYABLE_VALUE", zakatPayableValue);
+                    intent.putExtra("TOTAL_ZAKAT", totalZakat);
+                    startActivity(intent);
 
-                if (weightMinusX < 0) weightMinusX = 0;
-
-                double zakatPayableValue = weightMinusX * price;
-                double totalZakat = zakatPayableValue * 0.025;
-
-                Intent intent = new Intent(MainActivity.this, ResultActivity.class);
-                intent.putExtra("TOTAL_VALUE", totalValue);
-                intent.putExtra("PAYABLE_VALUE", zakatPayableValue);
-                intent.putExtra("TOTAL_ZAKAT", totalZakat);
-                startActivity(intent);
+                } catch (NumberFormatException e) {
+                    Toast.makeText(MainActivity.this, "Invalid number inputs format", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
@@ -105,7 +103,7 @@ public class MainActivity extends AppCompatActivity {
         } else if (id == R.id.action_share) {
             Intent shareIntent = new Intent(Intent.ACTION_SEND);
             shareIntent.setType("text/plain");
-            String shareBody = "Check out this Gold Zakat Calculator: https://github.com/yourusername/yourproject";
+            String shareBody = "Check out this Gold Zakat Calculator: https://github.com/Adryan2894/AuZakat-Calc";
             shareIntent.putExtra(Intent.EXTRA_TEXT, shareBody);
             startActivity(Intent.createChooser(shareIntent, "Share using"));
             return true;
@@ -113,6 +111,4 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
-
-
 }
